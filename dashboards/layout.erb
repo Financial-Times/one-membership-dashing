@@ -91,7 +91,6 @@
           failureOverlayContent.css('display', 'inline-block');
           failingMonitors.each(function( index ) {
             var dataId = $(this).attr('data-id');
-            console.log('Checking data id ' + dataId);
             // Check first if monitor was already added
             if(failureOverlayContent.find("div[data-id=" + dataId + "]").length == 0) {
               failureOverlayContent.append($(this).parent().clone());
@@ -101,7 +100,6 @@
 
         $.fn.hideFailureDashboard = function(){
           alertAudio.pause();
-          console.log('Playing fixed audio.');
           fixedAudio.play();
           failureOverlayContent.empty();
           failureOverlay.css('display', 'none');

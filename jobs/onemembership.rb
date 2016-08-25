@@ -113,19 +113,18 @@ end
 SCHEDULER.every '30s', first_in: 0 do |job|
 
   performCheckAndSendEventToWidgets('login', 'login-api-at-eu-prod.herokuapp.com', '/tests/critical', true)
-  performCheckAndSendEventToWidgets('validate-session', 'ft-memb-session-api-at-elb-p-301208839.eu-west-1.elb.amazonaws.com', '/tests/critical-validate', false)
+  performCheckAndSendEventToWidgets('user-products', 'usr-product-svc-at-eu-prod.herokuapp.com', '/tests/get-products-critical', true)
   getStatusFromHealthCheck('loginapi-eu', 'http://healthcheck.ft.com', '/service/399714ea73e0015e425666917931e6a4', s3oCredentials)
   getStatusFromHealthCheck('loginapi-us', 'http://healthcheck.ft.com', '/service/ad9e37cf76f09190d5e39a9fd71a874f', s3oCredentials)
   getStatusFromHealthCheck('loginapp-eu', 'http://healthcheck.ft.com', '/service/28c1512a87c1bb807ed55a6ecd7798b1', s3oCredentials)
   getStatusFromHealthCheck('loginapp-us', 'http://healthcheck.ft.com', '/service/ce39ec61ec18eefb5fadb9d4a89d1543', s3oCredentials)
-  getUptimeMetricsFromPingdom('2142836', apiKey, user, password)
+  getStatusFromHealthCheck('usr-product-svc-eu', 'http://healthcheck.ft.com', '/service/993cc7443e3161a3c4d5e0081b13e44d', s3oCredentials)
+  getStatusFromHealthCheck('usr-product-svc-us', 'http://healthcheck.ft.com', '/service/2e770914bca342d7bf9d8589efb29539', s3oCredentials)
 
 end
 
 SCHEDULER.every '600s', first_in: 0 do |job|
 
-  getResponseTimeMetricsFromLogentries('validate-session-rt-metrics', 'where(%2F%5C%2Fsessions.*%20(%3FP%3Crt%3E%5Cd%2B)%24%2F)%20calculate(percentile(95)%3Art)%20timeslice(12)', logentriesApiKey, '574a6e5c-cc27-4362-bed6-e93df3730a72', 300)
-  getResponseTimeMetricsFromLogentries('login-rt-metrics', 'where(%2FPOST%20%5C%2Flogin%20.*%20(%3FP%3Crt%3E%5Cd%2B)%24%2F)%20calculate(percentile(95)%3Art)%20timeslice(12)', logentriesApiKey, '2ef22249-9bf5-49c7-8024-79e3d5462de8', 300)
 
 end
 
