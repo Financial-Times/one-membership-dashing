@@ -63,20 +63,7 @@
         };
 
         $.fn.showScrollingAlert = function(failingMonitors){
-
           alertsDiv.css('display', 'inline-block');
-          var alertsMarquee = alertsDiv.find('marquee');
-          // Remove alert contents
-          alertsMarquee.empty();
-          failingMonitors.each(function( index ) {
-            var monitorName = $( this ).attr('data-title');
-            var impact = $( this ).attr('data-text');
-            var alertName = $("<p></p>").text("*" + monitorName + ":");
-            var alertDetails = $("<p></p>").text(impact  + "  ");
-            alertName.addClass('alert-name');
-            alertDetails.addClass('alert-details');
-            alertsMarquee.append(alertName, alertDetails);
-          });
         };
 
         $.fn.hideScrollingAlert = function(){
@@ -121,9 +108,7 @@
 
       });
     </script>
-    <div id="alerts">
-      <marquee behavior="scroll" direction="left" scrollamount="15" class="tab blink">
-      </marquee>
+
       <audio id="audio" loop autostart="0">
         <source src="/alert.mp3" type="audio/mpeg">
         Your browser does not support this audio format.
@@ -132,6 +117,5 @@
         <source src="/green.mp3" type="audio/mpeg">
         Your browser does not support this audio format.
       </audio>
-    </div>
   </body>
 </html>

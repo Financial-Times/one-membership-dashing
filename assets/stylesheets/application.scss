@@ -189,27 +189,6 @@ ul > h4 {
   z-index: 9;
 }
 
-#alerts {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color:black;
-  z-index: 9;
-  font-size: 23pt;
-  font-weight: bold;
-}
-
-.alert-name {
-  color: red;
-  display: inline;
-}
-
-.alert-details {
-  color: white;
-  display: inline;
-}
-
 // ----------------------------------------------------------------------------
 // Base widget styles
 // ----------------------------------------------------------------------------

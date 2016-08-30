@@ -41,8 +41,19 @@ def getStatusFromHealthCheck(widgetId, urlHost, urlPath, s3oCredentials)
   if status == 'OK'
     send_event(widgetId, { value: 'ok', status: 'available' })
   else
+    failures = getFailures(page)
+    send_event('alerts', { identifier: widgetId, value: failures.to_s })
     send_event(widgetId, { value: 'danger', status: 'unavailable' })
   end
+end
+
+def getFailures(page)
+  failingListItems = page.css('#checklist > li.error')
+  failures = Array.new
+  for failingListItem in failingListItems
+    failures.push(failingListItem.inner_text)
+  end
+  failures
 end
 
 def getUptimeMetricsFromPingdom(checkId, apiKey, user, password)
