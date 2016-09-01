@@ -27,6 +27,8 @@ def performCheckAndSendEventToWidgets(widgetId, urlHostName, urlPath, tlsEnabled
   if response.code == '200'
     send_event(widgetId, { value: 'ok', status: 'available' })
   else
+    failures = getTestFailures(response)
+    send_event('alerts', { identifier: widgetId, value: failures.to_s })
     send_event(widgetId, { value: 'danger', status: 'unavailable' })
   end
 
@@ -41,17 +43,30 @@ def getStatusFromHealthCheck(widgetId, urlHost, urlPath, s3oCredentials)
   if status == 'OK'
     send_event(widgetId, { value: 'ok', status: 'available' })
   else
-    failures = getFailures(page)
+    failures = getHealthcheckFailures(page)
     send_event('alerts', { identifier: widgetId, value: failures.to_s })
     send_event(widgetId, { value: 'danger', status: 'unavailable' })
   end
 end
 
-def getFailures(page)
+def getHealthcheckFailures(page)
   failingListItems = page.css('#checklist > li.error')
   failures = Array.new
   for failingListItem in failingListItems
     failures.push(failingListItem.inner_text)
+  end
+  failures
+end
+
+def getTestFailures(response)
+  jsonResponse = JSON.parse(response.body)
+  tests = jsonResponse['tests']
+  failures = Array.new
+  tests.each do |test|
+    passed = test['passed']
+    unless passed
+      failures.push(test['testName'].to_s)
+    end
   end
   failures
 end
