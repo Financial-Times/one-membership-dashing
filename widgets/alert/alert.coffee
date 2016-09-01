@@ -4,6 +4,7 @@ class Dashing.Alert extends Dashing.Widget
 
   ready: ->
     marquee = $(@node).find('marquee')
+    $(@node).removeClass('widget')
 
   onData: (data) ->
     title = $("div[data-id=#{data.identifier}]").attr('data-title')
