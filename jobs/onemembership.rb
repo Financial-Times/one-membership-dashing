@@ -149,8 +149,7 @@ SCHEDULER.every '30s', first_in: 0 do |job|
 
 end
 
-SCHEDULER.every '600s', first_in: 0 do |job|
-
+SCHEDULER.every '15s', first_in: 0 do |job|
 
 end
 
