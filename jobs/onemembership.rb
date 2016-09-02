@@ -149,6 +149,15 @@ SCHEDULER.every '30s', first_in: 0 do |job|
 
 end
 
+SCHEDULER.every '30s', first_in: 0 do |job|
+
+  performCheckAndSendEventToWidgets('user-profile', 'user-profile-svc-at-lb-eu-west-1.memb.ft.com', '/tests/get-profile-critical', true)
+  getStatusFromHealthCheck('user-profile-eu', 'http://healthcheck.ft.com', '/service/7b02faa0e45544c26c7f4dddcdafa251', s3oCredentials)
+  getStatusFromHealthCheck('user-profile-us', 'http://healthcheck.ft.com', '/service/41ddaf5f7110db4f05cf1104d21c0d78', s3oCredentials)
+
+end
+
 SCHEDULER.every '15s', first_in: 0 do |job|
+
 end
 
