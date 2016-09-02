@@ -63,7 +63,7 @@
           return $( "div.status-available" );
         };
 
-        $.fn.showScrollingAlert = function(failingMonitors){
+        $.fn.showScrollingAlert = function(){
           alertsDiv.css('display', 'inline-block');
         };
 
@@ -96,8 +96,9 @@
 
         window.setInterval(function(){
           var failingMonitors = $.fn.getFailingMonitors();
-          if(failingMonitors.length > 0){ // If there are failing monitors
-            $.fn.showScrollingAlert(failingMonitors);
+          var alertsMarquee = alertsDiv.find('marquee');
+          if(alertsMarquee.children().length > 0){ // If there are failing monitors on the alerts widget
+            $.fn.showScrollingAlert();
             $.fn.showFailureDashboard(failingMonitors);
           } else {
             if(failureOverlay.is(':visible') && alertsDiv.is(':visible')) { // Only hide alerts when they are visible
