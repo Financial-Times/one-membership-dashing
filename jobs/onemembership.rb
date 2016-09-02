@@ -25,11 +25,11 @@ def performCheckAndSendEventToWidgets(widgetId, urlHostName, urlPath, tlsEnabled
   response = http.request(Net::HTTP::Get.new(urlPath))
   print 'Accessing ' + urlHostName + ' Status Code ' + response.code + "\n"
   if response.code == '200'
-    send_event(widgetId, { value: 'ok', status: 'available' })
+    send_event(widgetId, { identifier: widgetId, value: 'ok', status: 'available' })
   else
     failures = getTestFailures(response)
     send_event('alerts', { identifier: widgetId, value: failures.to_s })
-    send_event(widgetId, { value: 'danger', status: 'unavailable' })
+    send_event(widgetId, { identifier: widgetId, value: 'danger', status: 'unavailable' })
   end
 
 end
@@ -41,11 +41,11 @@ def getStatusFromHealthCheck(widgetId, urlHost, urlPath, s3oCredentials)
   status = page.at_css('#status > div').inner_text
   print 'Status is ' + status + "\n"
   if status == 'OK'
-    send_event(widgetId, { value: 'ok', status: 'available' })
+    send_event(widgetId, { identifier: widgetId, value: 'ok', status: 'available' })
   else
     failures = getHealthcheckFailures(page)
     send_event('alerts', { identifier: widgetId, value: failures.to_s })
-    send_event(widgetId, { value: 'danger', status: 'unavailable' })
+    send_event(widgetId, { identifier: widgetId, value: 'danger', status: 'unavailable' })
   end
 end
 
