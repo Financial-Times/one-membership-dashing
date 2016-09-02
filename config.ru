@@ -2,7 +2,7 @@ require 'dashing'
 
 configure do
   set :auth_token, 'YOUR_AUTH_TOKEN'
-  set :default_dashboard, 'one-membership'
+  set :default_dashboard, 'platinum'
 
   helpers do
     def protected!
