@@ -1,0 +1,20 @@
+-# This is a dashboard in itself, so place it in the dashboards/ directory and
+-# configure the cycler below
+
+%script{src: "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js", type: "text/javascript"}
+%script{src: "/assets/cycler.js", type: "text/javascript"}
+
+:javascript
+  new Cycler({
+    // Board paths to cycle through
+    boards: ['platinum', 'gold'],
+    // How long to stay on each board, in seconds
+    duration: 20,
+    // By default, we only load the current board and the next one, to improve
+    // performance. By setting this to true, all boards can be loaded at once
+    loadAll: true,
+    width: 1920,
+    height: 1080
+  });
+
+%div#container

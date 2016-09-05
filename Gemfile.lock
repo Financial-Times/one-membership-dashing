@@ -29,6 +29,8 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.9.14-x64-mingw32)
     ffi (1.9.14-x86-mingw32)
+    haml (4.0.7)
+      tilt
     hike (1.2.3)
     http (0.9.8)
       addressable (~> 2.3)
@@ -126,6 +128,7 @@ PLATFORMS
 
 DEPENDENCIES
   dashing
+  haml
   nokogiri
   rest-client
   twitter (>= 5.9.0)
