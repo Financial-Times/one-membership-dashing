@@ -13,7 +13,7 @@ class Dashing.Alert extends Dashing.Widget
     # Only add the message if it doesn't exist yet
     if not messagePresent(identifier)
       container = createContainer(identifier)
-      alertName = createMessage(title, 'label')
+      alertName = createMessage(identifier.toUpperCase(), 'label')
       alertDetails = createMessage(dataValue, 'value')
       container.append(alertName, alertDetails)
       marquee.append(container)

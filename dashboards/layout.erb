@@ -17,10 +17,6 @@
 
 </head>
   <body>
-    <div id="overlay"></div>
-    <div id="overlay-content" class="gridster"></div>
-    <button id="fail">Fail Monitor</button>
-    <div id="tier"><%= yield_content(:tier) %> Tier</div>
     <div id="container">
       <%= yield %>
     </div>
@@ -32,92 +28,6 @@
       </div>
       <a href="#saving-instructions" id="save-gridster">Save this layout</a>
     <% end %>
-    <div id="alerts" data-id="alerts" data-view="Alert"></div>
-    <script type="application/javascript">
-      $(function(){
 
-        var failureOverlay = $('#overlay');
-        var failureOverlayContent = $('#overlay-content');
-        var alertsDiv = $('#alerts');
-
-        var alertAudio = document.getElementById('audio');
-        var fixedAudio = document.getElementById('green');
-
-        $("#fail").click( function()
-            {
-              var failMonitor1 = $("div[data-id='loginapi-us']");
-              failMonitor1.removeClass("status-available");
-              failMonitor1.addClass("status-unavailable");
-              var failMonitor2 = $("div[data-id='loginapi-eu']");
-              failMonitor2.removeClass("status-available");
-              failMonitor2.addClass("status-unavailable");
-            }
-        );
-
-        $.fn.getFailingMonitors = function(){
-          var container = $('#container');
-          return container.find( "div.status-unavailable" );
-        };
-
-        $.fn.getPassingMonitors = function(){
-          return $( "div.status-available" );
-        };
-
-        $.fn.showScrollingAlert = function(){
-          alertsDiv.css('display', 'inline-block');
-        };
-
-        $.fn.hideScrollingAlert = function(){
-          alertsDiv.css('display', 'none');
-        };
-
-        $.fn.showFailureDashboard = function(failingMonitors){
-          if (alertAudio.paused) {
-            alertAudio.play();
-          }
-          failureOverlay.css('display', 'inline-block');
-          failureOverlayContent.css('display', 'inline-block');
-          failingMonitors.each(function( index ) {
-            var dataId = $(this).attr('data-id');
-            // Check first if monitor was already added
-            if(failureOverlayContent.find("div[data-id=" + dataId + "]").length == 0) {
-              failureOverlayContent.append($(this).parent().clone());
-            }
-          });
-        };
-
-        $.fn.hideFailureDashboard = function(){
-          alertAudio.pause();
-          fixedAudio.play();
-          failureOverlayContent.empty();
-          failureOverlay.css('display', 'none');
-          failureOverlayContent.css('display', 'none');
-        };
-
-        window.setInterval(function(){
-          var failingMonitors = $.fn.getFailingMonitors();
-          var alertsMarquee = alertsDiv.find('marquee');
-          if(alertsMarquee.children().length > 0){ // If there are failing monitors on the alerts widget
-            $.fn.showScrollingAlert();
-            $.fn.showFailureDashboard(failingMonitors);
-          } else {
-            if(failureOverlay.is(':visible') && alertsDiv.is(':visible')) { // Only hide alerts when they are visible
-              $.fn.hideScrollingAlert();
-              $.fn.hideFailureDashboard();
-            }
-          }
-        }, 3000);
-
-      });
-    </script>
-
-      <audio id="audio" loop autostart="0">
-        <source src="/alert.mp3" type="audio/mpeg">
-        Your browser does not support this audio format.
-      </audio>
-      <audio id="green" autostart="0">
-        <source src="/green.mp3" type="audio/mpeg">
-        Your browser does not support this audio format.
-      </audio>
   </body>
 </html>
