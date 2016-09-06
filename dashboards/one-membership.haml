@@ -1,0 +1,24 @@
+-# This is a dashboard in itself, so place it in the dashboards/ directory and
+-# configure the cycler below
+
+%script{src: "/assets/application.js", type: "text/javascript"}
+%link{rel: "stylesheet", href: "/assets/application.css"}
+%script{src: "/assets/cycler.js", type: "text/javascript"}
+
+%link{rel: "stylesheet", href: "//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700", type: "text/css"}
+%link{rel: "icon", href: "/assets/favicon.ico"}
+
+%body
+  #container
+  :javascript
+    new Cycler({
+      // Board paths to cycle through
+      boards: ['platinum', 'gold'],
+      // How long to stay on each board, in seconds
+      duration: 15,
+      // By default, we only load the current board and the next one, to improve
+      // performance. By setting this to true, all boards can be loaded at once
+      loadAll: true,
+      width: 1920,
+      height: 1080
+    });
