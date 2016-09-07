@@ -49,6 +49,11 @@ def getStatusFromHealthCheck(widgetId, urlHost, urlPath, s3oCredentials)
   end
 end
 
+def failHealthCheck(widgetId, urlHost, urlPath, s3oCredentials)
+  send_event('alerts', { identifier: widgetId, value: 'Dependency session-api not healthy' })
+  send_event(widgetId, { identifier: widgetId, value: 'danger', status: 'unavailable' })
+end
+
 def getHealthcheckFailures(page)
   failingListItems = page.css('#checklist > li.error')
   failures = Array.new
@@ -156,7 +161,7 @@ SCHEDULER.every '30s', first_in: 0 do |job|
 
 end
 
-SCHEDULER.every '20s', first_in: 0 do |job|
+SCHEDULER.every '35s', first_in: 0 do |job|
 
 end
 

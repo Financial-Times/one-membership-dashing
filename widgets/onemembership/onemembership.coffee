@@ -1,15 +1,7 @@
 class Dashing.Onemembership extends Dashing.Widget
 
   ready: ->
-    #Check if node failed
-    if($(@node).hasClass("status-danger"))
-      # Add to failure overlay
-      dataId = $(@node).attr('data-id')
-      # Check first if monitor was already added
-      failureOverlayContent = $('#overlay-content', window.parent.document)
-      if(failureOverlayContent.find("div[data-id=" + dataId + "]").length == 0)
-        failureOverlayContent.append($(@node).parent().clone())
-        fixLayout(failureOverlayContent.find("div[data-id=" + dataId + "]").parent(), failureOverlayContent)
+
 
   onData: (data) ->
     # clear existing "status-*" classes
@@ -28,6 +20,15 @@ class Dashing.Onemembership extends Dashing.Widget
       # Get grandparent ul
       grandparent = $(@get('node')).parent().parent()
       fixLayout(parentListItem, grandparent)
+
+    if($(@node).hasClass("status-danger"))
+      # Add to failure overlay
+      dataId = $(@node).attr('data-id')
+      # Check first if monitor was already added
+      failureOverlayContent = $('#overlay-content', window.parent.document)
+      if(failureOverlayContent.find("div[data-id=" + dataId + "]").length == 0)
+        failureOverlayContent.append($(@node).parent().clone())
+        fixLayout(failureOverlayContent.find("div[data-id=" + dataId + "]").parent(), failureOverlayContent)
 
   removeAlert = (identifier) ->
     spanAlert = $('#alerts', window.parent.document).find("span[alert-id=#{identifier}]")
