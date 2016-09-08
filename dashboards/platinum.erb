@@ -4,9 +4,18 @@
   <ul>
     <h4>Acceptance Tests</h4>
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" onclick="window.open('https://login-api-at-eu-prod.herokuapp.com/tests/critical', '_blank');">
-      <div data-id="login" data-view="Onemembership" data-title="Log in users to ft.com" data-text="Impact: Users can't login"></div>
+      <div data-id="login-tests-eu" data-view="Onemembership" data-title="Log in users to ft.com (Europe)" data-text="Impact: Users can't login"></div>
     </li>
-    <li data-row="1" data-col="2" data-sizex="1" data-sizey="1" onclick="window.open('https://usr-product-svc-at-eu-prod.herokuapp.com/tests/get-products-critical', '_blank');">
+    <li data-row="1" data-col="2" data-sizex="1" data-sizey="1" onclick="window.open('https://login-api-at-us-prod.herokuapp.com/tests/critical', '_blank');">
+      <div data-id="login-tests-us" data-view="Onemembership" data-title="Log in users to ft.com (USA)" data-text="Impact: Users can't login"></div>
+    </li>
+    <li data-row="1" data-col="3" data-sizex="1" data-sizey="1" onclick="window.open('http://ft-memb-user-cred-svc-at-elb-eu-946129326.eu-west-1.elb.amazonaws.com/tests/change-credentials-critical', '_blank');">
+      <div data-id="user-cred-tests-eu" data-view="Onemembership" data-title="Change user credentials (Europe)" data-text="Impact: Users can't change email and/or password"></div>
+    </li>
+    <li data-row="1" data-col="4" data-sizex="1" data-sizey="1" onclick="window.open('http://ft-memb-access-service-at-elb-eu-287296531.eu-west-1.elb.amazonaws.com/tests/authorise-content-critical', '_blank');">
+      <div data-id="access-service-tests-eu" data-view="Onemembership" data-title="Authorise content access (Europe)" data-text="Impact: Paywall not functioning as expected.  Content may be free.  Users may not have access."></div>
+    </li>
+    <li data-row="1" data-col="5" data-sizex="1" data-sizey="1" onclick="window.open('https://usr-product-svc-at-eu-prod.herokuapp.com/tests/get-products-critical', '_blank');">
       <div data-id="user-products" data-view="Onemembership" data-title="Get User Products" data-text="Impact: User subscription status not retrievable. May have access issues."></div>
     </li>
   </ul>
